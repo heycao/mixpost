@@ -28,7 +28,8 @@ class Account extends Model
         'provider_id',
         'data',
         'authorized',
-        'access_token'
+        'access_token',
+        'service_id'
     ];
 
     protected $casts = [
@@ -144,5 +145,10 @@ class Account extends Model
     {
         $this->authorized = true;
         $this->save();
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
     }
 }

@@ -124,6 +124,13 @@ class ServiceManager
         }, []);
     }
 
+    public function getById(int $id, null|string $key = null)
+    {
+        $service = ServiceModel::findOrFail($id);
+
+        return $this->get($service->name, $key);
+    }
+
     public function put(string $name, array $configuration, bool $active = false): void
     {
         Cache::put($this->resolveCacheKey($name), [

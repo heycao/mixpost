@@ -27,7 +27,7 @@ class SocialProviderManager extends SocialProviderManagerAbstract
 
     protected function connectTwitterProvider()
     {
-        $config = ServiceManager::get('twitter', 'configuration');
+        $config = ServiceManager::getById($this->values['service_id'], 'configuration');
 
         $config['redirect'] = route('mixpost.callbackSocialProvider', ['provider' => 'twitter']);
 
@@ -36,7 +36,7 @@ class SocialProviderManager extends SocialProviderManagerAbstract
 
     protected function connectFacebookPageProvider()
     {
-        $config = ServiceManager::get('facebook', 'configuration');
+        $config = ServiceManager::getById($this->values['service_id'], 'configuration');
 
         $config['redirect'] = route('mixpost.callbackSocialProvider', ['provider' => 'facebook_page']);
 
@@ -57,7 +57,7 @@ class SocialProviderManager extends SocialProviderManagerAbstract
             $serverName = $this->values['data']['server']; // Get the server value that have been set on SocialProviderManager::connect($provider, array $values = [])
         }
 
-        $config = ServiceManager::get("mastodon.$serverName", 'configuration');
+        $config = ServiceManager::getById($this->values['service_id'], 'configuration');
 
         $config['redirect'] = route('mixpost.callbackSocialProvider', ['provider' => 'mastodon']);
         $config['values'] = [

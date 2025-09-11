@@ -22,6 +22,7 @@ return new class extends Migration {
         Schema::create('mixpost_accounts', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
+            $table->foreignId('service_id')->constrained('mixpost_services')->onDelete('cascade');
             $table->string('name');
             $table->string('username')->nullable();
             $table->json('media')->nullable();
@@ -32,7 +33,7 @@ return new class extends Migration {
             $table->longText('access_token');
             $table->timestamps();
 
-            $table->unique(['provider', 'provider_id'], 'accounts_unq_id');
+            $table->unique(['provider', 'provider_id', 'service_id'], 'accounts_unq_id');
         });
 
         Schema::create('mixpost_posts', function (Blueprint $table) {

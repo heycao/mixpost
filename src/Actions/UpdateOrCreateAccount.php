@@ -10,12 +10,13 @@ use Inovector\Mixpost\Support\MediaUploader;
 
 class UpdateOrCreateAccount
 {
-    public function __invoke(string $providerName, array $account, array $accessToken): void
+    public function __invoke(string $providerName, array $account, array $accessToken, int $service_id): void
     {
         $account = Account::updateOrCreate(
             [
                 'provider' => $providerName,
-                'provider_id' => $account['id']
+                'provider_id' => $account['id'],
+                'service_id' => $service_id
             ],
             [
                 'name' => $account['name'],
